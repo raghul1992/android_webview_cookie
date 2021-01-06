@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+<TITLE>My Acc</TITLE>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+<script>
+$(function(){
+    $("form#login").submit(function(){
+        var login = $("input[name=login]").val();
+        var password = $("input[name=password]").val();
+
+        $.ajax({
+            url: "https://api.myaccount.uat.test.athome.domgen.com/v1/identity/signin", 
+            type: "POST",
+			crossDomain: true,
+            data: {"email":login, "password":password},
+			contentType: "application/json",
+            dataType: "json",
+            cache: false,
+            success: function (data) {              
+                //make your redirect here or just display a message on the same page
+                window.location.href = "https://www.myaccount.uat.test.athome.domgen.com/my-plans";
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                // handle your error here
+                window.location.href = "https://www.google.com";
+            }       
+        });
+        //cancel the submit default behavior
+        return false;
+    });
+});
+</script>
+</HEAD>
+<BODY>
+<form id="login" name="login" action="" method="POST">
+    <input type="text" name="login" value="iluvsnake+10@gmail.com">
+    <input type="password" name="password" value="One12345">
+    <input type="submit" name="submit" value="Log in">
+</form>
+</BODY>
+</HTML>
